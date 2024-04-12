@@ -1,6 +1,8 @@
 import sys
 from PySide6.QtWidgets import *
 from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QColor
+
 
 class AnimationOptions(QWidget):
     def __init__(self):
@@ -11,7 +13,7 @@ class AnimationOptions(QWidget):
         items = ["None", "Drop-Down", "Fade Over"]
         self.mainCombo = QComboBox()
         self.mainCombo.addItems(items)
-        self.mainCombo.activated.connect(self.getdata)
+        #self.mainCombo.activated.connect(self.getdata)
 
 
         main = QWidget()
@@ -23,7 +25,7 @@ class AnimationOptions(QWidget):
         #Heading
         self.headCombo = QComboBox()
         self.headCombo.addItems(items)
-        self.headCombo.activated.connect(self.getdata)
+        #self.headCombo.activated.connect(self.getdata)
 
 
         head = QWidget()
@@ -35,7 +37,7 @@ class AnimationOptions(QWidget):
         #Content
         self.contentCombo = QComboBox()
         self.contentCombo.addItems(items)
-        self.contentCombo.activated.connect(self.getdata)
+        #self.contentCombo.activated.connect(self.getdata)
 
         content = QWidget()
         contentl = QHBoxLayout()
@@ -64,16 +66,38 @@ class AnimationOptions(QWidget):
         cc = self.contentCombo.currentText()
         print(f"main: {mc}, heading: {hc}, content: {cc}")
 
+class ColorPicker(QPushButton):
+    def __init__(self):
+        super().__init__()
+
+        self.setFixedSize(QSize(150,30))
+        self.setStyleSheet("background-color: #FFFFFF;")
+
+        self.show()
+
+        self.clicked.connect(self.get_color)
+
+        self.selected_color = QColor("FFFFFF") # Initialize selected color variable
+
+    def get_color(self):
+
+        color = QColorDialog.getColor()  
+
+        if color.isValid():  
+            self.selected_color = color
+            self.setStyleSheet(f"background-color: {color.name()};")
+            #print(color.name())
+
 class HeaderOptions(QWidget):
     def __init__(self):
         super().__init__()
-        #self.setFixedSize(QSize(350,200))
+        self.setFixedSize(QSize(350,200))
         
         #Font
         items = ["None", "Drop-Down", "Fade Over"]
         self.fontCombo = QComboBox()
         self.fontCombo.addItems(items)
-        self.fontCombo.activated.connect(self.getdata)
+        #self.fontCombo.activated.connect(self.getdata)
 
 
         font = QWidget()
@@ -85,7 +109,7 @@ class HeaderOptions(QWidget):
         #Size
         self.sizebox = QSpinBox()
         self.sizebox.setValue(16)
-        self.sizebox.valueChanged.connect(self.getdata)
+        #self.sizebox.valueChanged.connect(self.getdata)
 
         size = QWidget()
         sizel = QHBoxLayout()
@@ -94,7 +118,7 @@ class HeaderOptions(QWidget):
         size.setLayout(sizel)
 
         #Color
-        self.colorBox = QColorDialog().setOption(QColorDialog.NoButtons)
+        self.colorBox = ColorPicker()
 
         color = QWidget()
         colorl = QHBoxLayout()
@@ -120,17 +144,85 @@ class HeaderOptions(QWidget):
     def getdata(self, _):
         font = self.fontCombo.currentText()
         size = self.sizebox.value()
-        color = self.colorBox.selectedColor()
-        print(f"font: {font}, size: {size}, color: {color}")
+        print(f"font: {font}, size: {size}")
+
+class ContentOptions(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setFixedSize(QSize(350,200))
+        
+        #Font
+        items = ["None", "Drop-Down", "Fade Over"]
+        self.fontCombo = QComboBox()
+        self.fontCombo.addItems(items)
+        #self.fontCombo.activated.connect(self.getdata)
 
 
-def main():
-    app = QApplication(sys.argv)
+        font = QWidget()
+        fontl = QHBoxLayout()
+        fontl.addWidget(QLabel("Font"))
+        fontl.addWidget(self.fontCombo)
+        font.setLayout(fontl)
 
-    wid = HeaderOptions()
-    #id = AnimationOptions()
+        #Size
+        self.sizebox = QSpinBox()
+        self.sizebox.setValue(16)
+        #self.sizebox.valueChanged.connect(self.getdata)
 
-    sys.exit(app.exec())
+        size = QWidget()
+        sizel = QHBoxLayout()
+        sizel.addWidget(QLabel("Font Size"))
+        sizel.addWidget(self.sizebox)
+        size.setLayout(sizel)
+
+        #Color
+        self.colorBox = ColorPicker()
+
+        color = QWidget()
+        colorl = QHBoxLayout()
+        colorl.addWidget(QLabel("Font Color"))
+        colorl.addWidget(self.colorBox)
+        color.setLayout(colorl)
+
+        #boundingbox
+        box = QWidget()
+        boxl = QVBoxLayout()
+        boxl.addWidget(font)
+        boxl.addWidget(size)
+        boxl.addWidget(color)
+        box.setLayout(boxl)
+        
+        #layout
+        layout = QVBoxLayout()
+        layout.addWidget(QLabel("Content Settings"))
+        layout.addWidget(box)
+        self.setLayout(layout)
+        self.show()
+
+    def getdata(self, _):
+        font = self.fontCombo.currentText()
+        size = self.sizebox.value()
+        print(f"font: {font}, size: {size}")
+
+class Options(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setFixedSize(QSize(350,750))
+
+        self.heading = HeaderOptions()
+        self.animate = AnimationOptions()
+        self.content = ContentOptions()
+
+        # Setting Layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.animate)
+        layout.addWidget(self.heading)
+        layout.addWidget(self.content)
+        self.setLayout(layout)
+        self.show()
+
 
 if __name__ == "__main__":
-    main()
+    app = QApplication(sys.argv)
+    dialog = Options()
+    sys.exit(app.exec())

@@ -4,14 +4,14 @@ from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import *
 
 
-class MyWidget(QWidget):
+class Content(QWidget):
     def __init__(self):
         super().__init__()
         self.setFixedSize(QSize(350,750))
 
         # Image/Video Options
         self.op = QPushButton("O")
-        self.op.clicked.connect(self.getdata)
+        #self.op.clicked.connect(self.getdata)
         self.op.setFixedSize(QSize(50,50))
 
         self.imgurl = QLineEdit()
@@ -19,6 +19,7 @@ class MyWidget(QWidget):
 
         self.radioImg = QRadioButton("Image")
         self.radioVideo = QRadioButton("Video")
+        self.radioImg.setChecked(True)
 
         self.radio = QButtonGroup()
         self.radio.addButton(self.radioImg)
@@ -56,20 +57,21 @@ class MyWidget(QWidget):
         self.setLayout(layout)
         self.show()
 
-    def getdata(self):
-        url = self.imgurl.text()
-        hd = self.headerdata.toPlainText()
-        cd = self.contentdata.toPlainText()
-        h = self.header.isChecked()
-        c = self.content.isChecked()
-        iv = self.radio.checkedButton().text()
-        print(f"Header: {h} Checked: {c} Img/Vid: {iv}")
-        print(f"""Url: {url}
-Header Data: {hd}
-Content Data: {cd}""")
+        # Tester Funtions for individual Widget (Combined use in Builder.py)
+#    def getdata(self):
+#        url = self.imgurl.text()
+#        hd = self.headerdata.toPlainText()
+#        cd = self.contentdata.toPlainText()
+#        h = self.header.isChecked()
+#        c = self.content.isChecked()
+#        iv = self.radio.checkedButton().text()
+#        print(f"Header: {h} Checked: {c} Img/Vid: {iv}")
+#        print(f"""Url: {url}
+#Header Data: {hd}
+#Content Data: {cd}""")
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    widget = MyWidget()
+    widget = Content()
     sys.exit(app.exec())

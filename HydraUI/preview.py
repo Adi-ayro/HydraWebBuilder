@@ -33,13 +33,14 @@ class Preview(QWidget):
         self.show()
 
         #setting up signals
-        self.reload.clicked.connect(self.reload_page)
+        #self.reload.clicked.connect(self.reload_page)
 
-    def set_html(self, html):
-        self.web.setHtml(html)  
+    #Tester Functions
+    #def set_html(self, html):
+    #    self.web.setHtml(html)  
 
-    def reload_page(self):
-        self.web.reload()
+    #def reload_page(self):
+    #    self.web.reload()
 
 
 def main():
