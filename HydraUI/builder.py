@@ -11,7 +11,7 @@ import preview
 class Builder(QWidget):
     def __init__(self):
         super().__init__()
-        self.setFixedSize(QSize(1400,750))
+        self.setFixedSize(QSize(1350,725))
 
         self.options = options.Options()
         self.preview = preview.Preview()
@@ -77,10 +77,9 @@ class Builder(QWidget):
 
 def main():
     app = QApplication(sys.argv)
-    app.setStyle(QStyleFactory.create("Fusion"))
+    app.setStyle(QStyleFactory.create("Material"))
 
-    wid = Builder()
-    wid.set_html(html.html)
+    wid = boss()
 
     sys.exit(app.exec())
 

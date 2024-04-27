@@ -9,12 +9,12 @@ class Preview(QWidget):
         super().__init__()
         # Setting Reload Button
         self.reload = QPushButton("Reload")
-        self.reload.setFixedSize(QSize(100,50))
+        self.reload.setFixedSize(QSize(80,40))
         self.reload.show()
 
         # Setting Reload Button
         self.save = QPushButton("Save")
-        self.save.setFixedSize(QSize(100,50))
+        self.save.setFixedSize(QSize(80,40))
         self.save.show()
 
         #initialising webview
@@ -23,7 +23,7 @@ class Preview(QWidget):
         self.web.show()
 
         #setting up layout
-        self.setFixedSize(QSize(700,750))
+        self.setFixedSize(QSize(650,725))
 
         layout = QHBoxLayout()
         layout.addWidget(self.save)
