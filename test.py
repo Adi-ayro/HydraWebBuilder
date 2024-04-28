@@ -14,54 +14,124 @@ style2 = {
     "size" : "25px"
 }
 
+id = "Page1"
+header = True
+p = True
+hc = "Heading"
+pc = "lorem ipsum doler sit amet hvj ibibi hjiib iohih"
+fill = "Video"
+iurl = "https://images.pexels.com/photos/4063792/pexels-photo-4063792.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+vurl = "https://videos.pexels.com/video-files/7872533/7872533-hd_1080_1918_30fps.mp4"
+animation = "fade-in"
 
-def style(*args):
-    """
-    args : dictionary containing style options
-    keys:
-    id: list containing page ids
-    tag: h1 p div
-    font: font family
-    size: font size
-    color: font color
-    """
 
-    start = """
-    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-    <style amp-custom>
+def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation):
     """
+    id: id for page 
+    [header | p] : if header/p is enabled
+    [headerAnimation | pAnimation] : types of animation for tags
+    fillOption: Image/Video
+    url: Url link for Images / Video   
+    """
+    code = f'<amp-story-page id="{id}">'
 
-    end = """
-    </style>
-    </head>
-    <body>
-    """
-    
-    final = """
-    """
-    for arg in args:
-        id = arg["id"]
-        tag = arg["tag"]
-        font = arg["font"]
-        color = arg["color"]
-        size = arg["size"]
-
-        code = ""
-        for i in range(0,len(id) - 1):
-            code += f"{id[i]} {tag},"
-        code += f"{id[-1]} {tag}"
-        code += "{"
+    if(fillOption == "Video"):
         code += f"""
-        font-family: {font};
-        font-size: {size};
-        color: {color};
+        <amp-story-grid-layer template="fill">          
+            <amp-video autoplay
+                width="900"
+                height="1600"
+                layout="responsive"
+                src="{url}"
+                poster= " " >
+            </amp-video>
+        </amp-story-grid-layer>
         """
-        code += """}
+    if(fillOption == "Image"):
+        code += f"""
+        <amp-story-grid-layer template="fill">
+          <amp-img src="{url}"
+              width="900" height="1600"
+              layout="responsive">
+          </amp-img>
+        </amp-story-grid-layer>
         """
-        final += code
 
-    return start + final + end
+    code += f"""<amp-story-grid-layer template="vertical" style="align-content:end">
+        """
+    if(header):
+        code += f"""    <h1 { f'animate-in={headerAnimation}' if headerAnimation != 'None' else ''}>{headerContent}</h1>
+        """
 
-print(style(style1, style2))
+    if(p):
+        code += f"""    <p { f'animate-in={pAnimation}' if pAnimation != 'None' else ''}>{pContent}</p>
+        """    
+    
+    code += """</amp-story-grid-layer>
+    </amp-story-page>
+    """
 
+    return code 
 
+def gradientBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation):
+    """
+    id: id for page 
+    [header | p] : if header/p is enabled
+    [headerAnimation | pAnimation] : types of animation for tags
+    fillOption: Image/Video
+    url: Url link for Images / Video   
+    """
+    code = f'<amp-story-page id="{id}">'
+
+    if(fillOption == "Video"):
+        code += f"""
+        <amp-story-grid-layer template="fill">          
+            <amp-video autoplay
+                width="900"
+                height="1600"
+                layout="responsive"
+                src="{url}"
+                poster= " " >
+            </amp-video>
+        </amp-story-grid-layer>
+        """
+    if(fillOption == "Image"):
+        code += f"""
+        <amp-story-grid-layer template="fill">
+          <amp-img src="{url}"
+              width="900" height="1600"
+              layout="responsive">
+          </amp-img>
+        </amp-story-grid-layer>
+        """
+
+    code += f"""
+    <amp-story-grid-layer template="fill">
+        <div style="background: linear-gradient(
+            to bottom,  
+            rgba(256,256,256,0) 0%,   
+            rgba(256,256,256,0.2) 60%,  
+            rgba(0,0,0,0.8) 75%,  
+            rgba(0,0,0,1) 85%  
+        );">
+        </div>
+    </amp-story-grid-layer>
+    """
+
+    code += f"""<amp-story-grid-layer template="vertical" style="align-content:end">
+        """
+    if(header):
+        code += f"""    <h1 { f'animate-in={headerAnimation}' if headerAnimation != 'None' else ''}>{headerContent}</h1>
+        """
+
+    if(p):
+        code += f"""    <p { f'animate-in={pAnimation}' if pAnimation != 'None' else ''}>{pContent}</p>
+        """    
+    
+    code += """</amp-story-grid-layer>
+    </amp-story-page>
+    """
+
+    return code 
+
+print(gradientBottom(id, header, hc, p, pc, fill, vurl, animation, animation))
