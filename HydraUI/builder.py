@@ -69,17 +69,17 @@ class Builder(QWidget):
 
     # Workings for Preview    
     def set_html(self, html):
-        self.preview.web.setHtml(html)  
+        self.preview.set_html(html)  
 
     def reload_page(self):
-        self.preview.web.reload()
+        self.preview.reload_page()
 
 
 def main():
     app = QApplication(sys.argv)
     app.setStyle(QStyleFactory.create("Material"))
 
-    wid = boss()
+    wid = Builder()
 
     sys.exit(app.exec())
 

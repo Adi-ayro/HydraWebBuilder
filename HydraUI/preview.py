@@ -36,11 +36,11 @@ class Preview(QWidget):
         #self.reload.clicked.connect(self.reload_page)
 
     #Tester Functions
-    #def set_html(self, html):
-    #    self.web.setHtml(html)  
+    def set_html(self, html):
+        self.web.setHtml(html)  
 
-    #def reload_page(self):
-    #    self.web.reload()
+    def reload_page(self):
+        self.web.reload()
 
 
 def main():

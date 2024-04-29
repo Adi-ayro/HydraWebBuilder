@@ -1,3 +1,5 @@
+from data import *
+
 def boilerplate(title, canonical):
     code =f"""<!doctype html>
                <html amp lang="en">
@@ -78,7 +80,7 @@ def ending():
     </html>"""
     return end
 
-def plainTop(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation):
+def plainTop(data : Dataset, ani: Animation, vis: Visuals):
     """
     id: id for page 
     [header | p] : if header/p is enabled
@@ -86,6 +88,17 @@ def plainTop(id, header, headerContent, p, pContent, fillOption, url, headerAnim
     fillOption: Image/Video
     url: Url link for Images / Video   
     """
+    id = data.id
+    header = data.header
+    headerContent = data.headerData
+    p = data.content
+    pContent = data.contentData
+    fillOption = vis.filloptions
+    url = vis.url
+    headerAnimation = ani.headerAnimation
+    pAnimation = ani.pAnimation
+    imgAnimation = ani.imgAnimation
+    
     code = f"""
     <amp-story-page id="{id}">
     """
@@ -98,7 +111,7 @@ def plainTop(id, header, headerContent, p, pContent, fillOption, url, headerAnim
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " >
+                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -107,7 +120,8 @@ def plainTop(id, header, headerContent, p, pContent, fillOption, url, headerAnim
         <amp-story-grid-layer template="fill">
           <amp-img src="{url}"
               width="900" height="1600"
-              layout="responsive">
+              layout="responsive"
+              { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -132,7 +146,7 @@ def plainTop(id, header, headerContent, p, pContent, fillOption, url, headerAnim
 
     return code 
 
-def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation):
+def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation, imgAnimation):
     """
     id: id for page 
     [header | p] : if header/p is enabled
@@ -150,7 +164,7 @@ def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerA
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " >
+                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -159,7 +173,7 @@ def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerA
         <amp-story-grid-layer template="fill">
           <amp-img src="{url}"
               width="900" height="1600"
-              layout="responsive">
+              layout="responsive" { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -180,7 +194,7 @@ def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerA
 
     return code 
 
-def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation):
+def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation, imgAnimation):
     """
     id: id for page 
     [header | p] : if header/p is enabled
@@ -198,7 +212,7 @@ def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerA
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " >
+                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -207,7 +221,7 @@ def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerA
         <amp-story-grid-layer template="fill">
           <amp-img src="{url}"
               width="900" height="1600"
-              layout="responsive">
+              layout="responsive" { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -242,7 +256,7 @@ def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerA
     return code 
 
 
-def gradientBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation):
+def gradientBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation, imgAnimation):
     """
     id: id for page 
     [header | p] : if header/p is enabled
@@ -260,7 +274,7 @@ def gradientBottom(id, header, headerContent, p, pContent, fillOption, url, head
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " >
+                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -269,7 +283,7 @@ def gradientBottom(id, header, headerContent, p, pContent, fillOption, url, head
         <amp-story-grid-layer template="fill">
           <amp-img src="{url}"
               width="900" height="1600"
-              layout="responsive">
+              layout="responsive" { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
