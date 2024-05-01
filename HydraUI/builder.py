@@ -8,6 +8,11 @@ import content
 import options
 import preview
 
+sys.path.insert(1,'X:\\HydraWebBuilder\Engine')
+
+import data 
+import hgen
+
 class Builder(QWidget):
     def __init__(self):
         super().__init__()
@@ -48,12 +53,25 @@ class Builder(QWidget):
         print(f"Header Data: {hd}")
         print(f"Content Data: {cd}")
 
+        #Html for Content
+        info = data.Dataset('cover',h,c,hd,cd)
+        vis = data.Visuals(iv,url)
+
         # Fetcher for Options
         cfont = self.options.content.fontCombo.currentText()
         csize = self.options.content.sizebox.value()
         ccolor = self.options.content.colorBox.selected_color.name()
         print("Content Options:")
         print(f"font: {cfont}, size:{csize}, color: {ccolor} ")
+        
+        #style1
+        style1 = {
+            "id":["#cover"],
+            "tag":"p",
+            "font":cfont,
+            "size":csize,
+            "color":ccolor
+        }
 
         hfont = self.options.heading.fontCombo.currentText()
         hsize = self.options.heading.sizebox.value()
@@ -61,11 +79,26 @@ class Builder(QWidget):
         print("Heading Options:")
         print(f"font: {hfont}, size:{hsize}, color: {hcolor} ") 
 
+        #style2
+        style2 = {
+            "id":["#cover"],
+            "tag":"h",
+            "font":hfont,
+            "size":hsize,
+            "color":hcolor
+        }
+
         mc = self.options.animate.mainCombo.currentText()
         hc = self.options.animate.headCombo.currentText()
         cc = self.options.animate.contentCombo.currentText()
         print(f"Animation Options")
         print(f"main: {mc}, heading: {hc}, content: {cc}")
+        # animations
+        ani = data.Animation(hc,cc,mc)
+
+        a = hgen.htmlPreview('plainTop',ani,info,vis,style1,style2).code
+        print(a)
+        self.set_html(a)
 
     # Workings for Preview    
     def set_html(self, html):

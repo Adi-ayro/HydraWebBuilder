@@ -1,3 +1,11 @@
+class Start:
+    def __init__(self,canonical,title,publisher,poster,logo):
+        self.canonical = canonical
+        self.title = title
+        self.publisher = publisher
+        self.poster = poster
+        self.logo = logo
+
 class Animation:
     def __init__(self,h,p,img):
         self.headerAnimation = h

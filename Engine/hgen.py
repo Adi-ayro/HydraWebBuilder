@@ -12,6 +12,9 @@ class Router:
         if(name == "gradientTop"):
             self.function = gradientTop
 
+    def __call__(self, data, ani, vis):
+        return self.function(data, ani, vis)
+
 
 class htmlPreview:
     def __init__(self, function, ani : Animation, data : Dataset, vis : Visuals, *args):

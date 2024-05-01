@@ -121,7 +121,7 @@ def plainTop(data : Dataset, ani: Animation, vis: Visuals):
           <amp-img src="{url}"
               width="900" height="1600"
               layout="responsive"
-              { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+              { f'animate-in="{imgAnimation}"' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -131,12 +131,12 @@ def plainTop(data : Dataset, ani: Animation, vis: Visuals):
         """
     if(header):
         code += f"""
-        <h1 { f'animate-in={headerAnimation}' if headerAnimation != 'None' else ''}>{headerContent}</h1>
+        <h1 { f'animate-in="{headerAnimation}"' if headerAnimation != 'None' else ''}>{headerContent}</h1>
         """
 
     if(p):
         code += f"""
-        <p { f'animate-in={pAnimation}' if pAnimation != 'None' else ''}>{pContent}</p>
+        <p { f'animate-in="{pAnimation}"' if pAnimation != 'None' else ''}>{pContent}</p>
         """    
     
     code += """

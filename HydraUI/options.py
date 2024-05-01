@@ -10,7 +10,7 @@ class AnimationOptions(QWidget):
         self.setFixedSize(QSize(350,200))
         
         #Main
-        items = ["None", "Drop-Down", "Fade Over"]
+        items = ["None", "Drop-Down","Verdana", "Fade Over"]
         self.mainCombo = QComboBox()
         self.mainCombo.addItems(items)
         #self.mainCombo.activated.connect(self.getdata)
@@ -94,7 +94,7 @@ class HeaderOptions(QWidget):
         self.setFixedSize(QSize(350,200))
         
         #Font
-        items = ["None", "Drop-Down", "Fade Over"]
+        items = ["None", "Verdana", "Times New Roman"]
         self.fontCombo = QComboBox()
         self.fontCombo.addItems(items)
         #self.fontCombo.activated.connect(self.getdata)
@@ -152,7 +152,7 @@ class ContentOptions(QWidget):
         self.setFixedSize(QSize(350,200))
         
         #Font
-        items = ["None", "Drop-Down", "Fade Over"]
+        items = ["None", "Verdana", "Fade Over"]
         self.fontCombo = QComboBox()
         self.fontCombo.addItems(items)
         #self.fontCombo.activated.connect(self.getdata)
