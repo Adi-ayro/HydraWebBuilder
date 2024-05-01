@@ -14,9 +14,10 @@ import data
 import hgen
 
 class Builder(QWidget):
-    def __init__(self):
+    def __init__(self, fn):
         super().__init__()
         self.setFixedSize(QSize(1350,725))
+        self.function = fn
 
         self.options = options.Options()
         self.preview = preview.Preview()
@@ -96,8 +97,8 @@ class Builder(QWidget):
         # animations
         ani = data.Animation(hc,cc,mc)
 
-        a = hgen.htmlPreview('plainTop',ani,info,vis,style1,style2).code
-        print(a)
+        a = hgen.htmlPreview(self.function,ani,info,vis,style1,style2).code
+        #print(a)
         self.set_html(a)
 
     # Workings for Preview    

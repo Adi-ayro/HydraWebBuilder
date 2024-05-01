@@ -3,13 +3,13 @@ from data import *
 
 class Router:
     def __init__(self, name):
-        if(name == "plainBottom"):
+        if(name == "Plain Bottom"):
             self.function = plainBottom
-        if(name == "gradientBottom"):
+        if(name == "Gradient Bottom"):
             self.function = gradientBottom
-        if(name == "plainTop"):
+        if(name == "Plain Top"):
             self.function = plainTop
-        if(name == "gradientTop"):
+        if(name == "Gradient Top"):
             self.function = gradientTop
 
     def __call__(self, data, ani, vis):
