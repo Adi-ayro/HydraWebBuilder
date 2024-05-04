@@ -55,8 +55,8 @@ class Builder(QWidget):
         print(f"Content Data: {cd}")
 
         #Html for Content
-        info = data.Dataset('cover',h,c,hd,cd)
-        vis = data.Visuals(iv,url)
+        self.info = data.Dataset('cover',h,c,hd,cd)
+        self.vis = data.Visuals(iv,url)
 
         # Fetcher for Options
         cfont = self.options.content.fontCombo.currentText()
@@ -66,13 +66,7 @@ class Builder(QWidget):
         print(f"font: {cfont}, size:{csize}, color: {ccolor} ")
         
         #style1
-        style1 = {
-            "id":["#cover"],
-            "tag":"p",
-            "font":cfont,
-            "size":csize,
-            "color":ccolor
-        }
+        self.stylep = data.Style(["cover"],"p",cfont,ccolor,csize)
 
         hfont = self.options.heading.fontCombo.currentText()
         hsize = self.options.heading.sizebox.value()
@@ -81,13 +75,7 @@ class Builder(QWidget):
         print(f"font: {hfont}, size:{hsize}, color: {hcolor} ") 
 
         #style2
-        style2 = {
-            "id":["#cover"],
-            "tag":"h",
-            "font":hfont,
-            "size":hsize,
-            "color":hcolor
-        }
+        self.styleh1 = data.Style(["cover"],"h1",hfont,hcolor,hsize)
 
         mc = self.options.animate.mainCombo.currentText()
         hc = self.options.animate.headCombo.currentText()
@@ -95,10 +83,10 @@ class Builder(QWidget):
         print(f"Animation Options")
         print(f"main: {mc}, heading: {hc}, content: {cc}")
         # animations
-        ani = data.Animation(hc,cc,mc)
+        self.ani = data.Animation(hc,cc,mc)
 
-        a = hgen.htmlPreview(self.function,ani,info,vis,style1,style2).code
-        #print(a)
+        a = hgen.htmlPreview(self.function,self.ani,self.info,self.vis,self.stylep.getarg(),self.styleh1.getarg()).code
+        print(a)
         self.set_html(a)
 
     # Workings for Preview    
@@ -108,6 +96,11 @@ class Builder(QWidget):
     def reload_page(self):
         self.preview.reload_page()
 
+    def getData(self):
+        return data.Page(self.function, self.info, self.ani, self.vis)
+    
+    def getStyles(self):
+        return self.styleh1, self.stylep
 
 def main():
     app = QApplication(sys.argv)

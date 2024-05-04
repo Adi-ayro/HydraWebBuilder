@@ -24,3 +24,30 @@ class htmlPreview:
         c = AMPstandalone("None","None","None","None") 
         d = page(data, ani, vis)
         self.code = a + b + c + d + ending()
+
+class htmlExport:
+    def __init__(self, start: Start, styles, pages, filename, location):
+        self.start = start
+        self.styles = styles
+        self.pages = pages
+        self.filename = filename
+        self.location = location
+
+        a = boilerplate(self.start.title,self.start.canonical)
+        b = style(s.getarg() for s in self.styles)
+        c = AMPstandalone(self.start.title, self.start.publisher, self.start.logo, self.start.poster)
+
+        self.code = a + b + c
+
+        for page in pages:
+            self.code += Router(page.function)(page.dataset,page.animation,page.visual)
+
+        self.code += ending()
+
+    def maker(self):
+        addr = f"{self.location}/{self.filename}.html"
+        with open(addr, "w") as f:
+            f.write(self.code)
+            f.close()
+
+    

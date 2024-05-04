@@ -58,12 +58,12 @@ def style(*args):
 
         code = ""
         for i in range(0,len(id) - 1):
-            code += f"{id[i]} {tag},"
-        code += f"{id[-1]} {tag}"
+            code += f"#{id[i]} {tag},"
+        code += f"#{id[-1]} {tag}"
         code += "{"
         code += f"""
         font-family: {font};
-        font-size: {size};
+        font-size: {size}px;
         color: {color};
         """
         code += """}
@@ -146,7 +146,7 @@ def plainTop(data : Dataset, ani: Animation, vis: Visuals):
 
     return code 
 
-def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation, imgAnimation):
+def plainBottom(data : Dataset, ani: Animation, vis: Visuals):
     """
     id: id for page 
     [header | p] : if header/p is enabled
@@ -154,6 +154,17 @@ def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerA
     fillOption: Image/Video
     url: Url link for Images / Video   
     """
+    id = data.id
+    header = data.header
+    headerContent = data.headerData
+    p = data.content
+    pContent = data.contentData
+    fillOption = vis.filloptions
+    url = vis.url
+    headerAnimation = ani.headerAnimation
+    pAnimation = ani.pAnimation
+    imgAnimation = ani.imgAnimation
+
     code = f'<amp-story-page id="{id}">'
 
     if(fillOption == "Video"):
@@ -194,7 +205,7 @@ def plainBottom(id, header, headerContent, p, pContent, fillOption, url, headerA
 
     return code 
 
-def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation, imgAnimation):
+def gradientTop(data : Dataset, ani: Animation, vis: Visuals):
     """
     id: id for page 
     [header | p] : if header/p is enabled
@@ -202,6 +213,17 @@ def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerA
     fillOption: Image/Video
     url: Url link for Images / Video   
     """
+    id = data.id
+    header = data.header
+    headerContent = data.headerData
+    p = data.content
+    pContent = data.contentData
+    fillOption = vis.filloptions
+    url = vis.url
+    headerAnimation = ani.headerAnimation
+    pAnimation = ani.pAnimation
+    imgAnimation = ani.imgAnimation
+
     code = f'<amp-story-page id="{id}">'
 
     if(fillOption == "Video"):
@@ -256,7 +278,7 @@ def gradientTop(id, header, headerContent, p, pContent, fillOption, url, headerA
     return code 
 
 
-def gradientBottom(id, header, headerContent, p, pContent, fillOption, url, headerAnimation, pAnimation, imgAnimation):
+def gradientBottom(data : Dataset, ani: Animation, vis: Visuals):
     """
     id: id for page 
     [header | p] : if header/p is enabled
@@ -264,6 +286,17 @@ def gradientBottom(id, header, headerContent, p, pContent, fillOption, url, head
     fillOption: Image/Video
     url: Url link for Images / Video   
     """
+    id = data.id
+    header = data.header
+    headerContent = data.headerData
+    p = data.content
+    pContent = data.contentData
+    fillOption = vis.filloptions
+    url = vis.url
+    headerAnimation = ani.headerAnimation
+    pAnimation = ani.pAnimation
+    imgAnimation = ani.imgAnimation
+    
     code = f'<amp-story-page id="{id}">'
 
     if(fillOption == "Video"):

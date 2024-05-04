@@ -10,7 +10,7 @@ class AnimationOptions(QWidget):
         self.setFixedSize(QSize(350,200))
         
         #Main
-        items = ["None", "Drop-Down","Verdana", "Fade Over"]
+        items = ["None", "drop","fade-in", "fly-in-bottom","fly-in-left","fly-in-right","fly-in-top","pulse","rotate-in-left","rotate-in-right","twirl-in","whoosh-in-left","whoosh-in-right","pan-left","pan-right","pan-down","pan-up","pan-left","zoom-in","zoom-out"]
         self.mainCombo = QComboBox()
         self.mainCombo.addItems(items)
         #self.mainCombo.activated.connect(self.getdata)

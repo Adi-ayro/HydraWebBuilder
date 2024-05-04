@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import *
 
@@ -8,16 +8,24 @@ sys.path.insert(1,'X:\\HydraWebBuilder\Engine')
 import data 
 import hgen
 
-class Setup(QWidget):
+class Setup(QDialog):
     def __init__(self):
         super().__init__()
         #self.setFixedSize(QSize(900,600))
         
-        self.canonical = QLineEdit()
-        self.poster = QLineEdit()
-        self.logo = QLineEdit()
-        self.title = QLineEdit()
-        self.publisher = QLineEdit()
+        self.canonical = QLineEdit("https://www.example.com/sample.html")
+        self.poster = QLineEdit("https://picsum.photos/900/1600")
+        self.logo = QLineEdit("https://picsum.photos/200")
+        self.title = QLineEdit("Title")
+        self.publisher = QLineEdit("Legit Publisher Name")
+        self.submit = QPushButton("Save")
+        self.submit.clicked.connect(self.accept)
+
+        #self.canonical.setPlaceholderText("https://www.example.com/sample.html")
+        #self.poster.setPlaceholderText("https://picsum.photos/900/1600")
+        #self.logo.setPlaceholderText("https://picsum.photos/200")
+        #self.title.setPlaceholderText("Title")
+        #self.publisher.setPlaceholderText("Legit Publisher Name")
 
         layout = QGridLayout()
         layout.addWidget(QLabel("Canonical Link:"),0,0,1,2)
@@ -26,6 +34,7 @@ class Setup(QWidget):
         layout.addWidget(self.poster,2,3,1,2)
         layout.addWidget(self.publisher,4,0,1,2)
         layout.addWidget(self.logo,4,3,1,2)
+        layout.addWidget(self.submit,5,4,1,2)
         layout.addWidget(QLabel("Title:"),1,0,1,1)
         layout.addWidget(QLabel("Poster:"),1,3,1,1)
         layout.addWidget(QLabel("Publisher:"),3,0,1,1)
@@ -42,6 +51,10 @@ class Setup(QWidget):
         e = self.logo.text()
 
         self.data = data.Start(a,b,c,d,e)
+        return self.data
+    
+    def accept(self):
+        self.close()
         
 
 def main():

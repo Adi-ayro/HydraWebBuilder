@@ -5,6 +5,7 @@ from PySide6.QtCore import *
 from PySide6.QtGui import QAction
 
 from builder import *
+from setup import *
 
 class PageOptions(QDialog):
     def __init__(self):
@@ -72,13 +73,28 @@ class app(QMainWindow):
         export.triggered.connect(self.export)
         toolbar.addAction(export)
 
+        setup = QAction("Setup", self)
+        setup.triggered.connect(self.fetch)
+        toolbar.addAction(setup)
+
         #Layout
         central_widget = QWidget()
         layout = QVBoxLayout()
         layout.addWidget(self.tab_widget)
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
+
+        #starting app
+        self.fetch()
+
         self.show()
+
+    def fetch(self):
+        print("Initalising Setup")
+        ini = Setup()
+        wait = ini.exec()
+        self.initial = ini.getData()
+        print(self.initial.title)
 
     def add(self):
         print("clicked")
@@ -101,9 +117,32 @@ class app(QMainWindow):
     def export(self):
         idx = self.tab_widget.count()
         print(idx)
-        for i in range (0,idx):
+        pages = []
+        styles = []
+
+        widget = self.tab_widget.widget(1)
+        c = widget.getData()
+        c.dataset.setid("cover")
+        pages.append(c)
+        a,b = widget.getStyles()
+        a.setid("cover")
+        b.setid("cover")
+        styles.append()
+
+        for i in range (2,idx):
+            id = f"Page{i}"
             widget = self.tab_widget.widget(i)
-            widget.getdata()
+            
+            c = widget.getData()
+            c.dataset.setid(id)
+            pages.append(c)
+
+            a,b = widget.getStyles()
+            a.setid(id)
+            b.setid(id)
+            styles.append(a)
+            styles.append(b)
+
     
 
 

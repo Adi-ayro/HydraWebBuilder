@@ -20,6 +20,9 @@ class Dataset:
         self.headerData = hdata
         self.contentData = pdata
 
+    def setid(self, a):
+        self.id = a
+
 class Visuals: 
     def __init__(self,option,url):
         self.filloptions = option
@@ -33,6 +36,9 @@ class Style:
         self.color = color
         self.size = size
 
+    def setid(self, a):
+        self.id = a
+
     # Returns Dictionary
     def getarg(self):
         result = {}
@@ -42,3 +48,10 @@ class Style:
         result["color"] = self.color
         result["size"] = self.size
         return result
+    
+class Page:
+    def __init__(self, function, info: Dataset, ani : Animation, vis: Visuals):
+        self.function = function
+        self.dataset = info
+        self.animation = ani
+        self.visual = vis
