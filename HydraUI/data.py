@@ -6,6 +6,16 @@ class Start:
         self.poster = poster
         self.logo = logo
 
+    def publish(self):
+        s = f"""
+        {self.canonical}
+        {self.title}
+        {self.publisher}
+        {self.logo}
+        {self.poster}
+        """
+        print(s)
+
 class Animation:
     def __init__(self,h,p,img):
         self.headerAnimation = h
@@ -42,7 +52,7 @@ class Style:
     # Returns Dictionary
     def getarg(self):
         result = {}
-        result["id"] = self.id
+        result["id"] = [self.id]
         result["tag"] = self.tag
         result["font"] = self.font
         result["color"] = self.color

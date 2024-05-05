@@ -8,8 +8,6 @@ import content
 import options
 import preview
 
-sys.path.insert(1,'X:\\HydraWebBuilder\Engine')
-
 import data 
 import hgen
 
@@ -42,6 +40,8 @@ class Builder(QWidget):
         self.show()
 
     def getdata(self):
+        print("   ")
+        print("  ")
         # Fetcher for Content
         url = self.content.imgurl.text()
         hd = self.content.headerdata.toPlainText()
@@ -66,7 +66,7 @@ class Builder(QWidget):
         print(f"font: {cfont}, size:{csize}, color: {ccolor} ")
         
         #style1
-        self.stylep = data.Style(["cover"],"p",cfont,ccolor,csize)
+        self.stylep = data.Style("cover","p",cfont,ccolor,csize)
 
         hfont = self.options.heading.fontCombo.currentText()
         hsize = self.options.heading.sizebox.value()
@@ -75,7 +75,7 @@ class Builder(QWidget):
         print(f"font: {hfont}, size:{hsize}, color: {hcolor} ") 
 
         #style2
-        self.styleh1 = data.Style(["cover"],"h1",hfont,hcolor,hsize)
+        self.styleh1 = data.Style("cover","h1",hfont,hcolor,hsize)
 
         mc = self.options.animate.mainCombo.currentText()
         hc = self.options.animate.headCombo.currentText()
@@ -86,7 +86,7 @@ class Builder(QWidget):
         self.ani = data.Animation(hc,cc,mc)
 
         a = hgen.htmlPreview(self.function,self.ani,self.info,self.vis,self.stylep.getarg(),self.styleh1.getarg()).code
-        print(a)
+        #print(a)
         self.set_html(a)
 
     # Workings for Preview    
@@ -97,6 +97,7 @@ class Builder(QWidget):
         self.preview.reload_page()
 
     def getData(self):
+        self.getdata()
         return data.Page(self.function, self.info, self.ani, self.vis)
     
     def getStyles(self):

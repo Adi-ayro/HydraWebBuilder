@@ -7,6 +7,9 @@ from PySide6.QtGui import QAction
 from builder import *
 from setup import *
 
+import data
+import hgen
+
 class PageOptions(QDialog):
     def __init__(self):
         super().__init__()
@@ -94,7 +97,7 @@ class app(QMainWindow):
         ini = Setup()
         wait = ini.exec()
         self.initial = ini.getData()
-        print(self.initial.title)
+        self.initial.publish()
 
     def add(self):
         print("clicked")
@@ -117,40 +120,51 @@ class app(QMainWindow):
     def export(self):
         idx = self.tab_widget.count()
         print(idx)
-        pages = []
-        styles = []
 
-        widget = self.tab_widget.widget(1)
+        filename, _ = QFileDialog.getSaveFileName(
+            parent= None,  
+            caption="Save",    
+            filter="HTML File (*.html)",     
+        )
+
+        website = hgen.htmlExport(self.initial,filename)
+
+        widget = self.tab_widget.widget(0)
         c = widget.getData()
         c.dataset.setid("cover")
-        pages.append(c)
+        website.insertPage(c)
         a,b = widget.getStyles()
         a.setid("cover")
         b.setid("cover")
-        styles.append()
+        website.insertSyles(a,b)
 
-        for i in range (2,idx):
+        for i in range (1,idx):
             id = f"Page{i}"
             widget = self.tab_widget.widget(i)
             
             c = widget.getData()
             c.dataset.setid(id)
-            pages.append(c)
+            website.insertPage(c)
 
             a,b = widget.getStyles()
             a.setid(id)
             b.setid(id)
-            styles.append(a)
-            styles.append(b)
+            website.insertSyles(a,b)
 
-    
+        website.pageMaker()
+        print(website.getCode())
+
+        website.maker()
 
 
 def main():
     a = QApplication(sys.argv)
-    a.setStyle(QStyleFactory.create("Fusion"))
+    
+    b = app()
 
-    wid = app()
+    file = open("style.qss","r")
+    style = file.read()
+    b.setStyleSheet(style)
 
     sys.exit(a.exec())
 

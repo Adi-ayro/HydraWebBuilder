@@ -3,10 +3,7 @@ from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import *
 
-sys.path.insert(1,'X:\\HydraWebBuilder\Engine')
-
 import data 
-import hgen
 
 class Setup(QDialog):
     def __init__(self):
