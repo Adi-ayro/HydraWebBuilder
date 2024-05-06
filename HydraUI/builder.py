@@ -14,7 +14,7 @@ import hgen
 class Builder(QWidget):
     def __init__(self, fn):
         super().__init__()
-        self.setFixedSize(QSize(1350,725))
+        self.setMinimumSize(QSize(1350,725))
         self.function = fn
 
         self.options = options.Options()
@@ -34,9 +34,12 @@ class Builder(QWidget):
         layout.addWidget(self.content)
         self.setLayout(layout)
 
-        #self.centralWidget = QWidget()
-        #self.centralWidget.setLayout(layout)
-        #self.setCentralWidget(self.centralWidget)
+        #styling
+        self.setStyleSheet("""
+        font-size:16px;
+        color: #ffffff;
+        """)
+
         self.show()
 
     def getdata(self):
@@ -105,9 +108,9 @@ class Builder(QWidget):
 
 def main():
     app = QApplication(sys.argv)
-    app.setStyle(QStyleFactory.create("Material"))
+    app.setStyle(QStyleFactory.create("Fusion"))
 
-    wid = Builder()
+    wid = Builder("Plain Bottom")
 
     sys.exit(app.exec())
 

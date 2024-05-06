@@ -10,9 +10,9 @@ class Content(QWidget):
         self.setFixedSize(QSize(350,750))
 
         # Image/Video Options
-        self.op = QPushButton("O")
-        #self.op.clicked.connect(self.getdata)
-        self.op.setFixedSize(QSize(50,50))
+        #self.op = QPushButton("O")
+        ##self.op.clicked.connect(self.getdata)
+        #self.op.setFixedSize(QSize(50,50))
 
         self.imgurl = QLineEdit()
         self.imgurl.setFixedSize(QSize(330,30))
@@ -28,7 +28,7 @@ class Content(QWidget):
         a = QWidget()
         al = QHBoxLayout()
         al.addWidget(QLabel("Image/Video URL"), alignment= Qt.AlignLeft)
-        al.addWidget(self.op, alignment= Qt.AlignRight)
+        #al.addWidget(self.op, alignment= Qt.AlignRight)
         a.setLayout(al)
         a.setFixedSize(QSize(330,70))
 
@@ -40,7 +40,7 @@ class Content(QWidget):
         #Content Options
         self.content = QCheckBox("Content")
         self.contentdata = QTextEdit()
-        self.contentdata.setFixedSize(QSize(330,250))
+        self.contentdata.setFixedSize(QSize(330,150))
 
         # Create layout
         layout = QVBoxLayout(self)
@@ -52,6 +52,13 @@ class Content(QWidget):
         layout.addWidget(self.headerdata)
         layout.addWidget(self.content)
         layout.addWidget(self.contentdata)
+
+        self.setStyleSheet("""
+        QLineEdit, QTextEdit{
+            background-color: #2D2D2D;
+            border: none;
+        }
+        """)
 
         # Set layout
         self.setLayout(layout)

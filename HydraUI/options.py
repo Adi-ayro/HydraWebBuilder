@@ -94,7 +94,7 @@ class HeaderOptions(QWidget):
         self.setFixedSize(QSize(350,200))
         
         #Font
-        items = ["None", "Verdana", "Times New Roman"]
+        items = ['Courier New', 'Times New Roman', 'Ariel', 'Brush Script MT', 'Garamond', 'Georgia', 'Trebuchet MS', 'Tahoma', 'Verdana']
         self.fontCombo = QComboBox()
         self.fontCombo.addItems(items)
         #self.fontCombo.activated.connect(self.getdata)
@@ -152,7 +152,7 @@ class ContentOptions(QWidget):
         self.setFixedSize(QSize(350,200))
         
         #Font
-        items = ["None", "Verdana", "Fade Over"]
+        items = ['Courier New', 'Times New Roman', 'Ariel', 'Brush Script MT', 'Garamond', 'Georgia', 'Trebuchet MS', 'Tahoma', 'Verdana']
         self.fontCombo = QComboBox()
         self.fontCombo.addItems(items)
         #self.fontCombo.activated.connect(self.getdata)

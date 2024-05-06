@@ -32,6 +32,13 @@ class Preview(QWidget):
         self.setLayout(layout)
         self.show()
 
+        self.setStyleSheet("""
+        QPushButton{
+        background-color: #4F4F4F;
+        color: #ffffff;
+        }
+        """)
+
         #setting up signals
         #self.reload.clicked.connect(self.reload_page)
 

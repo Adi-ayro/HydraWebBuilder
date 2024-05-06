@@ -7,13 +7,14 @@ def boilerplate(title, canonical):
                   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
                   <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
                   <meta charset="utf-8">
+                  <meta name="description" content="{title}">
                   <script async src="https://cdn.ampproject.org/v0.js"></script>
                   <script async custom-element="amp-story"
                       src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
                   <title>{title}</title>
                   <meta name="viewport"
                         content="width=device-width,minimum-scale=1,initial-scale=1">
-                  <link rel="canonical" href="{canonical}/{title}.html">"""
+                  <link rel="canonical" href="{canonical}">"""
     return code
 
 def AMPstandalone(title,publisher,logo,poster):
@@ -111,7 +112,7 @@ def plainTop(data : Dataset, ani: Animation, vis: Visuals):
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+                poster= " " { f'animate-in={imgAnimation} animate-in-delay="0.5s" ' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -121,7 +122,7 @@ def plainTop(data : Dataset, ani: Animation, vis: Visuals):
           <amp-img src="{url}"
               width="900" height="1600"
               layout="responsive"
-              { f'animate-in="{imgAnimation}"' if imgAnimation != 'None' else ''}>
+              { f'animate-in="{imgAnimation}" animate-in-delay="0.5s" ' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -131,12 +132,12 @@ def plainTop(data : Dataset, ani: Animation, vis: Visuals):
         """
     if(header):
         code += f"""
-        <h1 { f'animate-in="{headerAnimation}"' if headerAnimation != 'None' else ''}>{headerContent}</h1>
+        <h1 { f'animate-in="{headerAnimation}" animate-in-delay="0.5s"' if headerAnimation != 'None' else ''}>{headerContent}</h1>
         """
 
     if(p):
         code += f"""
-        <p { f'animate-in="{pAnimation}"' if pAnimation != 'None' else ''}>{pContent}</p>
+        <p { f'animate-in="{pAnimation}" animate-in-delay="0.5s" ' if pAnimation != 'None' else ''}>{pContent}</p>
         """    
     
     code += """
@@ -175,7 +176,7 @@ def plainBottom(data : Dataset, ani: Animation, vis: Visuals):
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+                poster= " " { f'animate-in={imgAnimation} animate-in-delay="0.5s" ' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -184,7 +185,7 @@ def plainBottom(data : Dataset, ani: Animation, vis: Visuals):
         <amp-story-grid-layer template="fill">
           <amp-img src="{url}"
               width="900" height="1600"
-              layout="responsive" { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+              layout="responsive" { f'animate-in={imgAnimation} animate-in-delay="0.5s"' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -192,11 +193,11 @@ def plainBottom(data : Dataset, ani: Animation, vis: Visuals):
     code += f"""<amp-story-grid-layer template="vertical" style="align-content:end">
         """
     if(header):
-        code += f"""    <h1 { f'animate-in={headerAnimation}' if headerAnimation != 'None' else ''}>{headerContent}</h1>
+        code += f"""    <h1 { f'animate-in={headerAnimation} animate-in-delay="0.5s"' if headerAnimation != 'None' else ''}>{headerContent}</h1>
         """
 
     if(p):
-        code += f"""    <p { f'animate-in={pAnimation}' if pAnimation != 'None' else ''}>{pContent}</p>
+        code += f"""    <p { f'animate-in={pAnimation} animate-in-delay="0.5s"' if pAnimation != 'None' else ''}>{pContent}</p>
         """    
     
     code += """</amp-story-grid-layer>
@@ -234,7 +235,7 @@ def gradientTop(data : Dataset, ani: Animation, vis: Visuals):
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+                poster= " " { f'animate-in={imgAnimation} animate-in-delay="0.5s"' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -243,7 +244,7 @@ def gradientTop(data : Dataset, ani: Animation, vis: Visuals):
         <amp-story-grid-layer template="fill">
           <amp-img src="{url}"
               width="900" height="1600"
-              layout="responsive" { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+              layout="responsive" { f'animate-in={imgAnimation} animate-in-delay="0.5s"' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -264,11 +265,11 @@ def gradientTop(data : Dataset, ani: Animation, vis: Visuals):
     code += f"""<amp-story-grid-layer template="vertical">
         """
     if(header):
-        code += f"""    <h1 { f'animate-in={headerAnimation}' if headerAnimation != 'None' else ''}>{headerContent}</h1>
+        code += f"""    <h1 { f'animate-in={headerAnimation} animate-in-delay="0.5s" ' if headerAnimation != 'None' else ''}>{headerContent}</h1>
         """
 
     if(p):
-        code += f"""    <p { f'animate-in={pAnimation}' if pAnimation != 'None' else ''}>{pContent}</p>
+        code += f"""    <p { f'animate-in={pAnimation} animate-in-delay="0.5s"' if pAnimation != 'None' else ''}>{pContent}</p>
         """    
     
     code += """</amp-story-grid-layer>
@@ -307,7 +308,7 @@ def gradientBottom(data : Dataset, ani: Animation, vis: Visuals):
                 height="1600"
                 layout="responsive"
                 src="{url}"
-                poster= " " { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+                poster= " " { f'animate-in={imgAnimation} animate-in-delay="0.5s"' if imgAnimation != 'None' else ''}>
             </amp-video>
         </amp-story-grid-layer>
         """
@@ -316,7 +317,7 @@ def gradientBottom(data : Dataset, ani: Animation, vis: Visuals):
         <amp-story-grid-layer template="fill">
           <amp-img src="{url}"
               width="900" height="1600"
-              layout="responsive" { f'animate-in={imgAnimation}' if imgAnimation != 'None' else ''}>
+              layout="responsive" { f'animate-in={imgAnimation} animate-in-delay="0.5s"' if imgAnimation != 'None' else ''}>
           </amp-img>
         </amp-story-grid-layer>
         """
@@ -337,11 +338,11 @@ def gradientBottom(data : Dataset, ani: Animation, vis: Visuals):
     code += f"""<amp-story-grid-layer template="vertical" style="align-content:end">
         """
     if(header):
-        code += f"""    <h1 { f'animate-in={headerAnimation}' if headerAnimation != 'None' else ''}>{headerContent}</h1>
+        code += f"""    <h1 { f'animate-in={headerAnimation} animate-in-delay="0.5s"' if headerAnimation != 'None' else ''}>{headerContent}</h1>
         """
 
     if(p):
-        code += f"""    <p { f'animate-in={pAnimation}' if pAnimation != 'None' else ''}>{pContent}</p>
+        code += f"""    <p { f'animate-in={pAnimation} animate-in-delay="0.5s"' if pAnimation != 'None' else ''}>{pContent}</p>
         """    
     
     code += """</amp-story-grid-layer>

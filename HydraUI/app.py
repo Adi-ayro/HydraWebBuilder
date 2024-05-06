@@ -13,6 +13,8 @@ import hgen
 class PageOptions(QDialog):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("Select Templete")
+        self.setMinimumSize(QSize(400,200))
         self.clicked = None
 
         self.plainTop = QPushButton("Plain Top")
@@ -31,6 +33,19 @@ class PageOptions(QDialog):
         layout.addWidget(self.gradientTop,1,0)
         layout.addWidget(self.gradientBottom,1,1)
 
+        #Set StyleSheet
+        self.setStyleSheet("""
+        QDialog {
+            background-color: #042F2E;                  
+        }
+        QPushButton {
+            background-color: #FFFFFF;
+            color: #042F2E;                
+            font-size: 20px; 
+            height: 40px;               
+        }    
+        """)
+
         self.setLayout(layout)
         self.show()
     
@@ -46,6 +61,8 @@ class PageOptions(QDialog):
 class app(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setMinimumSize(QSize(1350,750))
+        self.setWindowTitle("Hydra Web Builder")
 
         #Tab Builder
         self.tab_widget = QTabWidget()
@@ -64,21 +81,21 @@ class app(QMainWindow):
         new.triggered.connect(self.add)
         toolbar.addAction(new)
 
-        curr = QAction("Index", self)
-        curr.triggered.connect(self.index)
-        toolbar.addAction(curr)
+        #curr = QAction("Index", self)
+        #curr.triggered.connect(self.index)
+        #toolbar.addAction(curr)
 
         remove = QAction("Delete Page", self)
         remove.triggered.connect(self.remove)
         toolbar.addAction(remove)
 
+        setup = QAction("Website Configurations", self)
+        setup.triggered.connect(self.fetch)
+        toolbar.addAction(setup)
+
         export = QAction("Export", self)
         export.triggered.connect(self.export)
         toolbar.addAction(export)
-
-        setup = QAction("Setup", self)
-        setup.triggered.connect(self.fetch)
-        toolbar.addAction(setup)
 
         #Layout
         central_widget = QWidget()
@@ -89,6 +106,8 @@ class app(QMainWindow):
 
         #starting app
         self.fetch()
+
+        self.tab_widget.setStyleSheet("background-color: #1E1E1E;")
 
         self.show()
 
@@ -105,6 +124,8 @@ class app(QMainWindow):
         wait = fn.exec()
 
         self.tab_widget.addTab(Builder(fn.getData()), f"Page{self.n}")
+        new_tab_index = self.tab_widget.count() - 1
+        self.tab_widget.setCurrentIndex(new_tab_index)
         self.n += 1
 
     def remove(self):
@@ -159,12 +180,13 @@ class app(QMainWindow):
 
 def main():
     a = QApplication(sys.argv)
+    a.setStyle(QStyleFactory.create("Fusion"))
     
     b = app()
 
-    file = open("style.qss","r")
-    style = file.read()
-    b.setStyleSheet(style)
+    #file = open("style.qss","r")
+    #style = file.read()
+    #b.setStyleSheet(style)
 
     sys.exit(a.exec())
 
