@@ -215,9 +215,9 @@ class Options(QWidget):
 
         # Setting Layout
         layout = QVBoxLayout()
-        layout.addWidget(self.animate)
         layout.addWidget(self.heading)
         layout.addWidget(self.content)
+        layout.addWidget(self.animate)
         self.setLayout(layout)
         self.show()
 
